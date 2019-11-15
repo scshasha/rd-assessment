@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { User } from './user';
 import { UserService } from './user.service';
@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
   	this.getUsers();
   }
 
-  getUsers(): void() {
+  getUsers(): void {
   	console.log("Gettings users!!!");
   	this.userService.getAll().subscribe(
   		(res: User[]) => {

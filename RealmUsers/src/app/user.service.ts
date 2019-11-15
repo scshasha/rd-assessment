@@ -22,8 +22,8 @@ export class UserService {
   getAll(): Observable<User[]> {
     return this.http.get(`${this.baseUrl}/list`).pipe(
       map((res) => {
-        this.cars = res['data'];
-        return this.cars;
+        this.users = res['data'];
+        return this.users;
       }),
       catchError(this.handleError));
   }

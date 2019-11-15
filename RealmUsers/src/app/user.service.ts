@@ -14,7 +14,7 @@ import { User } from './user';
 export class UserService {
 
   users: User[];
-  baseUrl: environment.apiUrl;
+  baseUrl: string = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
@@ -22,10 +22,15 @@ export class UserService {
   getAll(): Observable<User[]> {
     return this.http.get(`${this.baseUrl}/list`).pipe(
       map((res) => {
-        this.users = res['data'];
+        this.cars = res['data'];
         return this.cars;
-      });
-    );
+      }),
+      catchError(this.handleError));
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    console.log(error);
+    return throwError('Oops something went wrong. Please try again later');
   }
 
 }

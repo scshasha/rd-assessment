@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { environment } from './../environments/environment';
 
-import { Observables, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { User } from './user';
@@ -13,8 +13,19 @@ import { User } from './user';
 })
 export class UserService {
 
+  users: User[];
+  baseUrl: environment.apiUrl;
+
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable
+  // @todo
+  getAll(): Observable<User[]> {
+    return this.http.get(`${this.baseUrl}/list`).pipe(
+      map((res) => {
+        this.users = res['data'];
+        return this.cars;
+      });
+    );
+  }
 
 }

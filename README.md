@@ -8,8 +8,8 @@ This is an assessment applicaton
 ## Setup
 
 - Clone the repo
-- run `checkout -b fe origin/fe` to/and pull the frontend application.
-- run `checkout -b be origin/be` to pull down the backend api for the application.
+- run `git checkout -b fe origin/fe` to/and pull the frontend application.
+- run `git checkout -b be origin/be` to pull down the backend api for the application.
 
 ### Backend:
 - Create a database

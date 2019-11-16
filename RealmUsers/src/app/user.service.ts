@@ -39,6 +39,37 @@ export class UserService {
       catchError(this.handleError));
   }
 
+  update(user: User): Observable<User[]> {
+    return this.http.put(`${this.baseUrl}/update`, {data: user})
+      .pipe(map((res) => {
+        const theUser = this.users.find((item) => {
+          return +item['id'] === +user['id'];
+        });
+
+        if (theUser) {
+          theUser['first_name'] = user['first_name'];
+          theUser['last_name'] = user['last_name'];
+          theUser['email'] = user['email'];
+          theUser['phone'] = user['phone'];
+        }
+
+        return this.users;
+      }),
+      catchError(this.handleError));
+  }
+
+  delete(id: number): Observable<User> {
+    const params = new HttpParams().set('id', id.toString());
+    return this.http.delete(`${this.baseUrl}/delete`, { params: params })
+      .pipe(map(res => {
+        const filteredUsers = this.users.filter((user) => {
+          return +user['id'] !== +id;
+        });
+        return this.users = filteredUsers;
+      }),
+      catchError(this.handleError));
+  }
+
   private handleError(error: HttpErrorResponse) {
     console.log(error);
     return throwError('Oops something went wrong. Please try again later');

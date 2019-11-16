@@ -20,13 +20,29 @@ app.get('/list', function(req, res){
 	console.log('Retrieving data!!');
 	let data = [];
 	data['data'] = [{
-          'first_name': 'Chris',
+          "first_name": 'Chris',
           "last_name": 'Shasha',
-        }];
+          "email": 'scshasha@icloud.com',
+          "phone": '0123654789',
+        },
+        {
+          "first_name": 'Jane',
+          "last_name": 'Doe',
+          "email": 'janedoe@icloud.com',
+          "phone": '0123654789',
+        },
+        {
+          "first_name": 'John',
+          "last_name": 'Doe',
+          "email": 'johndoe@icloud.com',
+          "phone": '0123654789',
+        },
+    ];
+    console.log(data);
 	res.status(200).send(data);
 });
 
-app.post('/postnewuser', function(req, res) {
+app.post('/post', function(req, res) {
 	console.log("Posting data!!");
 	console.log(req.body);
 	res.status(200).send({"data": {'msg': 'Data recieved.'}})

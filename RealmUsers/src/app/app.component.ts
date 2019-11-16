@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
   	console.log("Gettings users!!!");
   	this.userService.getAll().subscribe(
   		(res: User[]) => {
+        console.log(res);
         this.users = res;
       },
       (err) => {
@@ -51,5 +52,32 @@ export class AppComponent implements OnInit {
         },
         (err) => this.error = err
       );
+  }
+
+  updateUser(fname,lname,mail,tel,id) {
+    this.success = '';
+    this.error = '';
+
+    this.userService.update({first_name: fname.value, last_name: lname.value, email: mail.value, phone: tel.value, id:+id})
+      .subscribe(
+        (res) => {
+          this.users = res;
+          this.success = 'Updated!';
+        },
+        (err) => this.error = err
+    );
+  }
+
+  deleteUser(id) {
+    this.success = '';
+    this.error = '';
+
+    this.userService.delete(+id).subscribe(
+      (res: User[]) => {
+        this.users = res;
+        this.success = "Deleted!";
+      },
+      (err) => this.error = err
+    );
   }
 }

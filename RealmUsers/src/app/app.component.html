@@ -15,6 +15,63 @@
     </ul>
   </div> -->
 
+  <div id="userList">
+    <h2 class="h2 title">User List</h2>
+    <div class="list-group">
+      <!-- <pre>{{ dump(users) }}</pre> -->
+      <div class="list-group-item row" *ngFor="let user of users;let i = index;">
+        <div class="col-md-4">
+          <input 
+            type="text" 
+            [(ngModel)]="users[i].first_name" 
+            class="form-control" 
+            pattern="^[a-zA-Z]+$" 
+            #firstname="ngModel" 
+            [ngClass]="{ 'is-invalid' : firstname.touched && firstname.invalid }" />
+        </div>
+        <div class="col-md-4">
+          <input 
+            type="text" 
+            [(ngModel)]="users[i].last_name" 
+            class="form-control" 
+            pattern="^[a-zA-Z]+$" 
+            #lastname="ngModel" 
+            [ngClass]="{ 'is-invalid' : lastname.touched && lastname.invalid }" />
+        </div>
+        <div class="col-md-4">
+          <input 
+            type="text" 
+            [(ngModel)]="users[i].email" 
+            class="form-control" 
+            #email="ngModel" 
+            [ngClass]="{ 'is-invalid' : email.touched && email.invalid }" />
+        </div>
+        <div class="col-md-4">
+          <input 
+            type="text" 
+            [(ngModel)]="users[i].phone" 
+            class="form-control" 
+            #phone="ngModel" 
+            [ngClass]="{ 'is-invalid' : phone.touched && phone.invalid }" />
+        </div>
+        <div class="col-md-4">
+          <input 
+            type="button"
+            value="Update"
+            class="btn btn-success btn-sm"
+            [disabled]="firstname.invalid || lastname.invalid || email.invalid || phone.invalid"
+            (click)="updateUser(first_name,last_name,email,phone,item.id)" />
+
+          <input 
+            type="button"
+            value="Delete"
+            class="btn btn-danger btn-sm"
+            (click)="deleteUser(item.id)" />  
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="userFrm">
     <form #f="ngForm" name="theForm" (submit)="addUser(f)">
       <div class="form-group">

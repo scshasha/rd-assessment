@@ -1,4 +1,8 @@
 <?php
+/**
+ * @file
+ * creates/saves a new user
+ */
 
 require_once('./connect.php');
 

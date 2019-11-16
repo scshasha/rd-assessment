@@ -12,28 +12,29 @@ import { User } from './user';
   providedIn: 'root'
 })
 export class UserService {
-
-  users: User[];
   baseUrl: string = environment.apiUrl;
+  users: User[];
 
   constructor(private http: HttpClient) { }
 
-  // @todo
   getAll(): Observable<User[]> {
     return this.http.get(`${this.baseUrl}/list`).pipe(
       map((res) => {
-        console.log("res:: ",res);
+        // console.log("getting:: ", this.users);
+        // console.log("res:: ",this.users);
         this.users = res['data'];
         return this.users;
       }),
       catchError(this.handleError));
   }
 
-  store(user: User): Observable<User> {
+  store(user: User): Observable<User[]> {
     return this.http.post(`${this.baseUrl}/postnewuser`, { data: user })
       .pipe(map((res)=> {
-        this.users.push(res['data']);
-        return this.users;
+        // this.users = User; // Somthing is weird here. Why is this variable undefinded
+        // debugger;
+        // this.users.push(res['data']);
+        return res['data'];
       }),
       catchError(this.handleError));
   }

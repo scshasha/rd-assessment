@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   users: User[];
   error = '';
   success = '';
-  user = new User('', 0);
+  user = new User('', '', '', ''); // Should match the User class constructor requirements
 
   constructor(private userService: UserService) {
 
@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
   addUser(f) {
     this.error = '';
     this.success = '';
-
+    // debugger;
     this.userService.store(this.user)
       .subscribe(
         (res: User[]) => {

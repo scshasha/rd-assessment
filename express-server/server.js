@@ -28,7 +28,8 @@ app.get('/list', function(req, res){
 
 app.post('/postnewuser', function(req, res) {
 	console.log("Posting data!!");
-	res.status(200).send({"msg": "Data recieved."})
+	console.log(req.body);
+	res.status(200).send({"data": {'msg': 'Data recieved.'}})
 });
 
 app

@@ -16,6 +16,23 @@ app.get('/', function(req, res) {
 	res.send('Msg fro server');
 });
 
+app.get('/list', function(req, res){
+	console.log('Retrieving data!!');
+	let data = [];
+	data['data'] = [{
+          'first_name': 'Chris',
+          "last_name": 'Shasha',
+        }];
+	res.status(200).send(data);
+});
+
+app.post('/postnewuser', function(req, res) {
+	console.log("Posting data!!");
+	res.status(200).send({"msg": "Data recieved."})
+});
+
+app
+
 app.listen(PORT, function(){
 	console.log("Server running on localhost:" + PORT);
 });

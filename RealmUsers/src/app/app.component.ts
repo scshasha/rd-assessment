@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   users: User[];
   error = '';
   success = '';
+  user = new User('', 0);
 
   constructor(private userService: UserService) {
 
@@ -32,5 +33,23 @@ export class AppComponent implements OnInit {
         this.error = err;
       }
   	);
+  }
+
+  // Create
+  addUser(f) {
+    this.error = '';
+    this.success = '';
+
+    this.userService.store(this.user)
+      .subscribe(
+        (res: User[]) => {
+          this.users = res;
+
+          this.success = "New user created!";
+
+          f.reset();
+        },
+        (err) => this.error = err
+      );
   }
 }

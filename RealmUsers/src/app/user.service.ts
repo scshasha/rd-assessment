@@ -22,7 +22,17 @@ export class UserService {
   getAll(): Observable<User[]> {
     return this.http.get(`${this.baseUrl}/list`).pipe(
       map((res) => {
+        console.log("res:: ",res);
         this.users = res['data'];
+        return this.users;
+      }),
+      catchError(this.handleError));
+  }
+
+  store(user: User): Observable<User> {
+    return this.http.post(`${this.baseUrl}/postnewuser`, { data: user })
+      .pipe(map((res)=> {
+        this.users.push(res['data']);
         return this.users;
       }),
       catchError(this.handleError));
